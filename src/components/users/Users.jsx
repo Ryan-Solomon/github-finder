@@ -22,8 +22,14 @@ class Users extends Component {
   };
 
   render() {
-    return <div>{this.renderList()}</div>;
+    return <div style={userStyle}>{this.renderList()}</div>;
   }
 }
+
+const userStyle = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(3,1fr)',
+  gridGap: '1rem',
+};
 
 export default Users;
