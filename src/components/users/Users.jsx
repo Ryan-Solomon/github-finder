@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
+import Spinner from '../layout/Spinner';
 import UserItem from './UserItem';
 
-class Users extends Component {
-  state = {
-    users: [],
-  };
-
-  renderList = () => {
-    const list = this.state.users.map((user) => {
+const Users = ({ users, loading }) => {
+  const renderList = () => {
+    const list = users.map((user) => {
       return (
         <UserItem
           key={user.id}
           id={user.id}
-          avatarUrl={user.avatarUrl}
-          htmlUrl={user.htmlUrl}
+          avatarUrl={user.avatar_url}
+          htmlUrl={user.html_url}
           login={user.login}
         />
       );
@@ -21,10 +19,20 @@ class Users extends Component {
     return list;
   };
 
-  render() {
-    return <div style={userStyle}>{this.renderList()}</div>;
-  }
-}
+  if (loading)
+    return (
+      <h1>
+        <Spinner />
+      </h1>
+    );
+
+  return <div style={userStyle}>{renderList()}</div>;
+};
+
+Users.propTypes = {
+  users: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+};
 
 const userStyle = {
   display: 'grid',
