@@ -25,7 +25,7 @@ UserItem.propTypes = {
   avatarUrl: PropTypes.string.isRequired,
   login: PropTypes.string.isRequired,
   htmlUrl: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default UserItem;
