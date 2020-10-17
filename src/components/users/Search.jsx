@@ -1,8 +1,13 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 class Search extends React.Component {
   state = {
     input: '',
+  };
+
+  static propTypes = {
+    searchUsers: PropTypes.func.isRequired,
   };
 
   onSubmit = (e) => {
