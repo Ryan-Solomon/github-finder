@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import About from '../src/pages/About';
 import './App.css';
 import Alert from './components/layout/Alert';
 import NavBar from './components/layout/NavBar';
@@ -31,22 +33,31 @@ class App extends React.Component {
 
   render() {
     if (this.state.alert) {
-      return <Alert message={this.state.alert.message} />;
+      return (
+        <div className={`alert alert-${this.state.alert.type}`}>
+          <Alert message={this.state.alert.message} />
+        </div>
+      );
     }
 
     return (
-      <div className='App'>
-        <NavBar title='NavBar' />
-        <div className='container'>
-          <Search
-            users={this.state.users}
-            clearUsers={this.clearUsers}
-            searchUsers={this.searchUsers}
-            setAlert={this.setAlert}
-          />
-          <Users loading={this.state.loading} users={this.state.users} />
-        </div>
-      </div>
+      <Router>
+        <Switch>
+          <div className='App'>
+            <NavBar title='NavBar' />
+            <div className='container'>
+              <Search
+                users={this.state.users}
+                clearUsers={this.clearUsers}
+                searchUsers={this.searchUsers}
+                setAlert={this.setAlert}
+              />
+              <Users loading={this.state.loading} users={this.state.users} />
+            </div>
+          </div>
+          <Route exact path='/about' component={About} />
+        </Switch>
+      </Router>
     );
   }
 }
