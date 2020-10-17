@@ -8,6 +8,8 @@ class Search extends React.Component {
 
   static propTypes = {
     searchUsers: PropTypes.func.isRequired,
+    clearUsers: PropTypes.func.isRequired,
+    users: PropTypes.array.isRequired,
   };
 
   onSubmit = (e) => {
@@ -29,6 +31,14 @@ class Search extends React.Component {
           />
           <input type='submit' className='btn-dark btn-block' />
         </form>
+        {this.props.users.length > 0 ? (
+          <button
+            onClick={this.props.clearUsers}
+            className='btn btn-light btn-block'
+          >
+            Clear
+          </button>
+        ) : null}
       </div>
     );
   }
