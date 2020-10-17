@@ -9,13 +9,18 @@ class Search extends React.Component {
   static propTypes = {
     searchUsers: PropTypes.func.isRequired,
     clearUsers: PropTypes.func.isRequired,
+    setAlert: PropTypes.func.isRequired,
     users: PropTypes.array.isRequired,
   };
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.searchUsers(this.state.input);
-    this.setState({ input: '' });
+    if (this.state.input === '') {
+      this.props.setAlert('Please enter something', 'light');
+    } else {
+      this.props.searchUsers(this.state.input);
+      this.setState({ input: '' });
+    }
   };
 
   render() {
