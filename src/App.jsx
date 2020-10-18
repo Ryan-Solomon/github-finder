@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import About from '../src/pages/About';
 import './App.css';
@@ -48,11 +48,11 @@ const App = () => {
     setUsers([]);
   };
 
-  const setAlert = (message, type) => {
+  const handleAlert = (message, type) => {
     setAlert({ alert: { message, type } });
   };
 
-  if (this.state.alert) {
+  if (alert) {
     return (
       <div className={`alert alert-${alert.type}`}>
         <Alert message={alert.message} />
@@ -75,7 +75,7 @@ const App = () => {
                     users={users}
                     clearUsers={clearUsers}
                     searchUsers={searchUsers}
-                    setAlert={setAlert}
+                    setAlert={handleAlert}
                   />
                 </React.Fragment>
               )}
