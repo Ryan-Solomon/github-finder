@@ -9,6 +9,7 @@ const User = (props) => {
     const { getUser, getUserRepos } = props;
     getUser(props.math.params.login);
     getUserRepos(props.math.params.login);
+    //   eslint-disable-next-line
   }, []);
 
   const {
