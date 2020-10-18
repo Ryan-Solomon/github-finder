@@ -15,6 +15,7 @@ class App extends React.Component {
     user: {},
     loading: false,
     alert: null,
+    repos: [],
   };
 
   searchUsers = async (searchTerm) => {
@@ -31,6 +32,14 @@ class App extends React.Component {
       `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     );
     this.setState({ user: data, loading: false });
+  };
+
+  getUserRepos = async (username) => {
+    this.setState({ loading: true });
+    const { data } = await axios.get(
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    );
+    this.setState({ repos: data, loading: false });
   };
 
   clearUsers = () => {
@@ -81,6 +90,8 @@ class App extends React.Component {
             render={(props) => (
               <User
                 {...props}
+                getUserRepos={this.getUserRepos}
+                repos={this.state.repos}
                 getUser={this.getUser}
                 user={this.state.user}
                 loading={this.state.loading}
