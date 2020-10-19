@@ -28,8 +28,11 @@ const Search = (props) => {
         />
         <input type='submit' className='btn-dark btn-block' />
       </form>
-      {props.users.length > 0 ? (
-        <button onClick={props.clearUsers} className='btn btn-light btn-block'>
+      {githubContext.users.length > 0 ? (
+        <button
+          onClick={githubContext.clearUsers}
+          className='btn btn-light btn-block'
+        >
           Clear
         </button>
       ) : null}
@@ -38,9 +41,7 @@ const Search = (props) => {
 };
 
 Search.propTypes = {
-  clearUsers: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
-  users: PropTypes.array.isRequired,
 };
 
 export default Search;

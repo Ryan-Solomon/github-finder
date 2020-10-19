@@ -1,14 +1,18 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import GithubContext from '../../context/github/githubContext';
 import Spinner from '../layout/Spinner';
 import { Repos } from '../repos/Repos';
 
 const User = (props) => {
+  const githubContext = useContext(GithubContext);
+  const { getUser, loading, user } = githubContext;
+
   useEffect(() => {
-    const { getUser, getUserRepos } = props;
-    getUser(props.math.params.login);
-    getUserRepos(props.math.params.login);
+    const { getUserRepos } = props;
+    githubContext.getUser(match.params.login);
+    getUserRepos(match.params.login);
     //   eslint-disable-next-line
   }, []);
 
@@ -20,7 +24,6 @@ const User = (props) => {
     blog,
     login,
     company,
-    html,
     html_url,
     followers,
     following,
@@ -28,8 +31,6 @@ const User = (props) => {
     public_gists,
     hireable,
   } = props.user;
-
-  const { loading, repos } = props;
 
   if (loading) return <Spinner />;
 
@@ -97,11 +98,8 @@ const User = (props) => {
 };
 
 User.propTypes = {
-  getUser: PropTypes.func.isRequired,
   getUserRepos: PropTypes.func.isRequired,
   repos: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired,
 };
 
 export default User;
