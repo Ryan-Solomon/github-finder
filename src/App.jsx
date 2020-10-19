@@ -10,8 +10,6 @@ import Users from './components/users/Users';
 import GithubState from './context/github/GithubState';
 
 const App = () => {
-  const [alert, setAlert] = useState(null);
-
   const handleAlert = (message, type) => {
     setAlert({ alert: { message, type } });
   };
